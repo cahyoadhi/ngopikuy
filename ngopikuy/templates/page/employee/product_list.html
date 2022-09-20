@@ -1,5 +1,14 @@
+<<<<<<< HEAD
 {% extends 'page/employee/layout/base-list.html' %}
 {% block list %}
+=======
+{% extends 'layout/base.html' %}
+{% load static %}
+{% block title %}
+{% endblock %}
+
+{% block content %}
+>>>>>>> 87c7d5d92dfee47b0e12cef2e69699a3218bfe4d
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css">
 {% if messages %}  
@@ -14,6 +23,7 @@
     </script>  
     {% endfor %}
 {% endif %}
+<<<<<<< HEAD
 
 <a class="animated" href="/add_product" style="color: #fff;background-color: #3c49bd;padding: 0.6em;border-radius: var(--border-radius-1);box-shadow: var(--box-shadow);font-weight: 600;margin-bottom: 5rem;">ADD PRODUCT</a>
 <div class="recent-orders" id="orderlist" style="overflow-y: scroll;height: 90vh;">
@@ -46,4 +56,49 @@
         </tbody>
     </table>
 </div>   
+=======
+<link rel="stylesheet" type="text/css" href="{% static 'css/dashboard.css' %}">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp"rel="stylesheet">
+<div class="container">
+    <!-- --------------------- ASIDE BAR --------------------- -->
+    {% include 'layout/sidebar.html' %}
+    <!-- --------------------- END OF ASIDE --------------------- -->
+    <main>  
+        <div class="hide" id="hide">
+            <span id="openNav" class="material-icons-sharp" style="cursor: pointer;font-size:3em;padding-left: 10%;">menu</span>
+        </div>
+        <a class="animated" href="/add_product" style="color: #fff;background-color: #3c49bd;padding: 0.6em;border-radius: var(--border-radius-1);box-shadow: var(--box-shadow);font-weight: 600;margin-bottom: 5rem;">ADD PRODUCT</a>
+        <div class="recent-orders" id="orderlist" style="overflow-y: scroll;height: 90vh;">
+            <table>
+                <thead>
+                    <tr>
+                        <th ></th>
+                        <th ></th>
+                        <th style="text-align: start;padding-left: 1rem;">Product Name</th>
+                        <th>Price</th>
+                        <th ></th>
+                        <th ></th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for item in product %}
+                    <tr >
+                        <td></td> 
+                        <td></td> 
+                        <td style="text-align: start;padding-left: 1rem;width: 40%;">{{item.name}}</td>
+                        <td style="width: 40%;">Rp. {{item.priceCurrency}}</td>         
+                        {% if user.is_superuser %}
+                            <td style="text-align: start;padding-left: 1rem;width: 5%;"><a style="color: red;" href="/product/{{item.id}}">delete</a></td>
+                        {% else %}  
+                            <td></td> 
+                        {% endif %}                      
+                        <td style="text-align: start;padding-left: 1rem;width: 5%;"><a href="/product/{{item.id}}">edit</a></td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>   
+    </main>
+</div>
+>>>>>>> 87c7d5d92dfee47b0e12cef2e69699a3218bfe4d
 {% endblock %}
