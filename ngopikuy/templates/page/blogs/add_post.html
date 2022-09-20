@@ -1,0 +1,22 @@
+{% extends 'layout/base.html' %}
+{% load static %}
+{% block title %}
+{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/dashboard.css' %}">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp"rel="stylesheet">
+{% include 'layout/alert.html' %}
+<div class="container">
+    <!-- --------------------- ASIDE BAR --------------------- -->
+{% include 'layout/sidebar.html' %}
+    <!-- --------------------- END OF ASIDE --------------------- -->
+    <main>  
+        <h1>Create New Post</h1>
+        <div class="recent-orders">
+        {% include 'layout/post-form.html' %}
+        </div>   
+    </main>
+</div>
+{% endblock %}
+

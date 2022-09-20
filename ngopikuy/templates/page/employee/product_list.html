@@ -1,0 +1,49 @@
+{% extends 'page/employee/layout/base-list.html' %}
+{% block list %}
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css">
+{% if messages %}  
+    {% for message in messages %}
+    <script type="text/javascript">
+        Swal.fire({
+            icon: 'success',
+            title: '{{message}}',
+        }).then((result) => {
+
+        })
+    </script>  
+    {% endfor %}
+{% endif %}
+
+<a class="animated" href="/add_product" style="color: #fff;background-color: #3c49bd;padding: 0.6em;border-radius: var(--border-radius-1);box-shadow: var(--box-shadow);font-weight: 600;margin-bottom: 5rem;">ADD PRODUCT</a>
+<div class="recent-orders" id="orderlist" style="overflow-y: scroll;height: 90vh;">
+    <table>
+        <thead>
+            <tr>
+                <th ></th>
+                <th ></th>
+                <th style="text-align: start;padding-left: 1rem;">Product Name</th>
+                <th>Price</th>
+                <th ></th>
+                <th ></th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for item in product %}
+            <tr >
+                <td style="text-align: start;padding-left: 1rem;width: 0%;"></td> 
+                <td style="text-align: start;padding-left: 1rem;width: 0%;"></td> 
+                <td style="text-align: start;padding-left: 1rem;width: 50%;">{{item.name}}</td>
+                <td style="width: 30%;">Rp. {{item.priceCurrency}}</td>         
+                {% if user.is_superuser %}
+                    <td style="text-align: start;padding-left: 1rem;width: 5%;"><a style="color: red;" href="/delete/product/{{item.id}}">delete</a></td>
+                {% else %}  
+                    <td style="text-align: start;padding-left: 1rem;width: 0%;"></td> 
+                {% endif %}                      
+                <td style="text-align: start;padding-left: 1rem;width: 5%;"><a href="/product/{{item.id}}">edit</a></td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>   
+{% endblock %}

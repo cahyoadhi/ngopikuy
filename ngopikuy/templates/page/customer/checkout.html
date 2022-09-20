@@ -1,0 +1,116 @@
+{% extends 'layout/base.html' %}
+{% load static %}
+{% block title %}
+{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/checkout.css' %}">
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css">
+{% if messages %}  
+    {% for message in messages %}
+    <script type="text/javascript">
+        Swal.fire({
+            icon: 'success',
+            title: '{{message}}',
+        }).then((result) => {
+          if (result.isConfirmed) {
+            window.location.href = "/customer/"
+          }
+        })
+    </script>  
+    {% endfor %}
+{% endif %}   
+<div class='container'>
+    <div class='window'>
+      <div class='order-info'>
+        <div class='order-info-content'>
+          <h2>Order Summary</h2>
+          <div class="order-info-details">
+            {% for cart in cart %}
+            <div class='line'></div>
+            <table class='order-table'>
+                <tbody>
+                <tr>
+                    <td><img src={{cart.product.imageUrl}} class='full-width'></img>
+                    </td>
+                    <td>
+                    <br> <span class='thin'>{{cart.product.name}}</span>
+                    <br><p class='thin small'> Quantity: {{ cart.quantity }}</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                    <div class='price'>{{cart.totalPriceNominal|floatformat:-2}}&nbsp;K</div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            {% endfor %}
+          </div>
+          <div class='line'></div>
+          <div class='total'>
+            <span style='float:left;'>
+              TOTAL
+            </span>
+            <span style='float:right; text-align:right;'>
+                Rp.&nbsp;{{total}}
+            </span>
+          </div>
+        </div>
+    </div>
+    <div class='credit-info'>
+        <div class='credit-info-content'>
+            <form method="POST">
+                {% csrf_token %}
+                <h2>Customer Info</h2>
+                Name
+                <input class='input-field' name="name"></input>
+                Address
+                <input class='input-field' name="address"></input>
+                <table class='half-input-table'>
+                <tr><td>Your payment method : </td><td><div class='dropdown' id='card-dropdown'>
+                    <select name="payment-method" class='dropdown-btn' selected="cash">
+                        <option value="cash">Cash</option>
+                        <option value="emoney">E-Money</option>
+                        <option value="paypal">Paypal</option>
+                        <option value="cc">Credit Card</option>
+                    </select>  
+                </table>
+                <div class="payment-with-cc">
+                    <img src='{% static 'images/visa.png' %}' height='80' class='credit-card-image' id='credit-card-image'></img>
+                    Card Number
+                    <input class='input-field'></input>
+                    Card Holder
+                    <input class='input-field'></input>
+                    <table class='half-input-table'>
+                        <tr>
+                        <td> Expires
+                            <table class='half-input-table'>
+                                <td><input class='input-field' maxlength="2" placeholder="mm"></input></td>
+                                <td><input class='input-field' maxlength="2" placeholder="yy"></input></td>
+                            </table>
+                        </td>
+                        <td>CVC
+                            <input class='input-field' maxlength="3"></input>
+                        </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="scanqr">
+                    <img src='{% static 'images/qris.png' %}' height='80' class='credit-card-image ' id='credit-card-image'></img>
+                    <img src='{% static 'images/qr.png' %}' class='barcode '></img>
+                </div>
+                <div class="paypal">
+                    <img src='{% static 'images/paypal.png' %}' height='80' class='credit-card-image ' id='credit-card-image'></img>
+                    <img src='{% static 'images/qrpaypal.png ' %}' class='barcode '></img>
+                </div>
+                <input class='pay-btn' type="submit" value="Submit Order"/> 
+            </form>
+        </div>
+    </div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+<script src="{% static 'js/script.js' %}"></script> 
+
+{% endblock %}

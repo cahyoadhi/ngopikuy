@@ -1,0 +1,16 @@
+{% extends 'layout/base.html' %}
+{% load static %}
+{% block title %}
+{% endblock %}
+{% load unicorn %}
+
+{% block content %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'css/customer.css' %}">
+{% unicorn_scripts %}
+{% include 'layout/navbar.html' %}
+{% unicorn 'cart' name=request.user user=request.user.pk coffees=coffees blends=blends teas=teas chocolates=chocolates juices=juices profiles=profile%}
+
+{% endblock content %}
+
+

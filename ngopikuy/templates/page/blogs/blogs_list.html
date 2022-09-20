@@ -1,0 +1,52 @@
+{% extends 'layout/base.html' %}
+{% load static %}
+{% block title %}
+{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/dashboard.css' %}">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp"rel="stylesheet">
+<div class="container">
+    <!-- --------------------- ASIDE BAR --------------------- -->
+    {% include 'layout/sidebar.html' %}
+    <!-- --------------------- END OF ASIDE --------------------- -->
+    <main>  
+        <div class="hide" id="hide">
+            <span id="openNav" class="material-icons-sharp" style="cursor: pointer;font-size:3em;padding-left: 10%;">menu</span>
+        </div>
+        
+        <div class="recent-orders" id="orderlist">
+            <a class="animated" href="/add_post" style="color: #fff;background-color: #3c49bd;padding: 0.6em;border-radius: var(--border-radius-1);box-shadow: var(--box-shadow);font-weight: 600;margin-bottom: 5rem;">CREATE NEW POST</a>
+            <table >
+                <thead>
+                    <tr>
+                        <th>Author</th>
+                        <th style="text-align: start;padding-left: 1rem;">Tittle</th>
+                        <th>Updated On</th>
+                        <th>Created On</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for item in blogs %}
+                    <tr >
+                        <td>{{item.author}}</td>
+                        <td style="text-align: start;padding-left: 1rem">{{item.title}}</td>
+                        <td>{{item.updated_on}}</td>
+                        <td>{{item.created_on}}</td>
+                        {% if user.is_superuser %}
+                            <td style="text-align: start;padding-left: 1rem;width: 5%;"><a style="color: red;" href="/product/{{item.id}}">delete</a></td>
+                        {% else %}  
+                            <td></td> 
+                        {% endif %}
+                        <td style="text-align: start;padding-left: 1rem;width: 5%;"><a href="/edit/{{item.slug}}">edit</a></td>
+                        
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>   
+    </main>
+</div>
+{% endblock %}

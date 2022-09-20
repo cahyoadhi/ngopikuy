@@ -1,0 +1,21 @@
+{% extends 'layout/base.html' %}
+{% load static %}
+{% block title %}
+{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/dashboard.css' %}">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp"rel="stylesheet">
+<div class="container">
+    <!-- --------------------- ASIDE BAR --------------------- -->
+    {% include 'layout/sidebar.html' %}
+    <!-- --------------------- END OF ASIDE --------------------- -->
+    <main>          
+        <div class="hide" id="hide">
+            <span id="openNav" class="material-icons-sharp" style="cursor: pointer;font-size:3em;padding-left: 10%;">menu</span>
+        </div>
+        {% block list %}
+        {% endblock list %}
+    </main>
+</div>
+{% endblock %}

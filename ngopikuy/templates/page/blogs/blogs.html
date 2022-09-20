@@ -1,0 +1,27 @@
+{% extends 'layout/base.html' %}
+{% load static %}
+{% block content %}
+{% include 'layout/navbar.html' %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'css/blogs.css' %}">
+<div class="container">
+    {% for post in posting %}
+        <div class="card" >
+            <div class="image-content">
+                <div class="card-image">
+                    <img src={{post.thumbnailUrl}} alt="" class="card-img lazy" loading="lazy" loading="lazy">
+                </div>
+            </div>
+            <div class="card-content">
+                <h2 class="name"><a href="{% url 'post_detail' post.slug  %}" class="button-card">{{ post.title }}</a></h2>
+                <p style="text-align: center;font-size: 0.9rem;">by: {{ post.author }}</p>
+                <p class="description" >{{post.content|slice:":500"|safe }}</p>
+                
+            </div>
+        </div>
+
+    {% endfor %}
+</div>
+
+
+{%endblock%}
