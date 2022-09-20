@@ -1,0 +1,141 @@
+{% extends 'layout/base.html' %}
+{% load static %}
+{% block title %}
+{% endblock %}
+
+{% block content %}
+  <link rel="stylesheet" type="text/css" href="{% static 'css/dashboard.css' %}">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp"rel="stylesheet">
+  <div class="container">
+      {% include 'layout/sidebar.html' %}
+  {% comment %} END OF ASIDE {% endcomment %}
+      <main>
+          <div class="navbar">
+            <h1>Dashboard</h1> 
+            <span id="openNav" class="material-icons-sharp">menu</span>
+          </div>
+          <div class="insights">
+              <div class="total-order">
+                  <span class="material-icons-sharp">analytics</span>
+                  <h3>Total Order</h3>
+                  <h1 id="total-order"></h1>
+              </div>
+              <div class="incomplete">
+                <span class="material-icons-sharp">hourglass_top</span>
+                <h3>Ongoing Order</h3>
+                <h1 id="ongoing-order"></h1>
+            </div>            
+              <div class="complete">
+                <span class="material-icons-sharp">check</span>
+                <h3>Complete Order</h3>
+                <h1 id="complete-order"></h1>
+              </div>
+              <div class="income">
+                  <span class="material-icons-sharp">account_balance_wallet</span>
+                  <h3>Total Income</h3>
+                  <h1 id="income"></h1>
+              </div>
+          </div>
+
+  {% comment %} END OF INSIGHTS {% endcomment %}
+
+          <div class="recent-orders">
+              <h2>Realtime Orders</h2>
+              <table class="scroll-reveal">
+                  <thead>
+                      <tr>
+                          <th>Order Time</th>
+                          <th>Customer Name</th>
+                          <th>Status</th>
+                          <th>Payment</th>
+                          <th>Total Price</th>
+                          <th></th>
+                      </tr>
+                  </thead>
+                  <tbody id="stream-content">
+
+                  </tbody>
+              </table>
+          </div>  
+      </main>
+
+  {% comment %} END OF MAIN {% endcomment %}
+
+  </div>
+
+  <script>
+    // Stream data order
+    var eventSource  = new EventSource("/stream/");
+
+    eventSource.onmessage = function(e) {
+      
+      final_data = JSON.parse(e.data)
+      content = "";
+
+      final_data.forEach(function (item){
+        content += buildPostContent(item['id'], item['user__username'], item['tracking_no'], item['created_add'], item['status'], item['payment'], item['total_price'])
+      })
+        document.getElementById('stream-content').innerHTML = content;
+
+        // Count total order
+        countOrder('#stream-content tr','none', 'total-order');
+
+        // Count Complete order
+        countOrder('.Complete','none', 'complete-order');
+
+        // Count Ongoing order
+        countOrder('.Process','.New-Order', 'ongoing-order');
+
+        // Count Revenue
+        var revenue = 0;
+        $('tr #totalComplete').each(function(){
+          var tdTxt = $(this).text();
+          var rev = tdTxt.substring(3)
+          revenue += parseFloat(rev);          
+        });
+    
+        income = Intl.NumberFormat({ maximumSignificantDigits: 3 }).format(revenue)
+        content = `Rp. ${income}`;
+        document.getElementById('income').innerHTML = content;
+        };
+        
+
+    eventSource.onerror = function(e) {
+      console.log(`error ${e}`);
+    }
+
+    function buildPostContent(order_id, user, tracking_no, created_add, status, payment, total_price) {
+        difference = getDifference(created_add);
+        if (difference > 36e5) {
+          times_dif = Math.round(difference / 36e5)+" hours ago";
+        }else{
+          times_dif = Math.round(difference / 6e4)+" minutes ago";
+        };
+        
+        content = `<tr class=${status}>
+                    <td class='text-left'>${times_dif}</td>
+                    <td>${user}</td>
+                    <td id=${status}>${status}</td>
+                    <td class='text-left'>${payment}</td>
+                    <td id="total${status}">Rp.${total_price}</td>
+                    <td ><a class="primary" href="/order/${tracking_no}" role="button">Open</a></td >
+                  </tr>`;
+      return content
+    }
+
+    // counting time
+    function getDifference(dt) {
+        let dt1 = new Date(dt);
+        let now = new Date();
+        let difference = Math.abs(now - dt1);
+        return Math.round(difference);
+    }
+
+    function countOrder(parent1, parent2, child){
+        let count = document.querySelectorAll(parent1).length + document.querySelectorAll(parent2).length;
+        let content = `${count}`;
+        document.getElementById(child).innerHTML = content;
+    }
+
+  </script>
+{% endblock %}

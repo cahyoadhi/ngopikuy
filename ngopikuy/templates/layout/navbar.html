@@ -1,0 +1,166 @@
+{% load static %} 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js" integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="{% static 'js/script.js' %}"></script>  
+<link rel="stylesheet" type="text/css" href="{% static 'css/navbar.css' %}">
+<script src="https://cdn.lordicon.com/xdjxvujz.js"></script>
+<div class="head">
+  <div class="left"><h3><a href="/">ngopikuy</a></h3>
+  </div>
+  <div class="middle">
+    <div class="navbar">
+      <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/customer/">Product</a></li>
+        <li><a href="/blogs/">Blogs</a></li>
+        <li><a href="/about/">About</a></li>
+        <li><a href="/contact/">Contact</a></li>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+      </ul>
+    </div>
+  </div>
+  <div class="right">
+    <div id="main">
+      <span class="material-icons-outlined hide" onclick="openNav()">
+        menu
+        </span>
+    </div>
+    <div id="mySidenav" class="sidenav">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <div class="profile-photo">
+          <div class="image-wrapper">
+            {% if user.is_staff %}
+            {% if user.is_superuser %}
+              <img src="https://brandeps.com/logo-download/S/Super-User-logo-vector-01.svg" style="background-color: #fff;" alt="">
+            {% else %}
+              <img src="https://cdn0.iconfinder.com/data/icons/banking-and-finance-86/100/employee__user__avatar__man__male-512.png" style="background-color: #fff;" alt="">
+            {% endif %}
+          {% else %}
+          <img src="https://i.pinimg.com/736x/65/25/a0/6525a08f1df98a2e3a545fe2ace4be47.jpg" alt="">
+          {% endif %}
+          </div>
+        </div>
+        <h2>{{ user.get_username }}</h2></>
+        {% if user.is_superuser %}
+          <p>as admin </p>
+          {% else %}
+          {% if user.is_staff %}
+            <p>as employee </p>
+          {% else %}
+            <p>customer </p>
+          {% endif %}
+        {% endif %}
+        
+        <a href="/">Home</a></>
+        <a href="/customer/">Product</a></>
+        <a href="/blogs/">Blogs</a></>
+        <a href="/about/">About</a></>
+        <a href="/contact/">Contact</a></>
+        {% if user.is_authenticated %}
+         {% if user.is_staff %}
+         <a href="/dashboard/">Dashboard</a></>
+         {% endif %}
+         <a href="/logout/">Logout</a></>
+        {% endif %}
+      </div>
+    <div class="big">
+      {% if user.is_authenticated %}
+          {% if user.is_staff %}
+            <div id="mains">
+              <p " class="navbar-right" id="navbar-right" onclick="openNavPrimary()">
+                <span class="navbar-right">
+                  <lord-icon src="https://cdn.lordicon.com/dklbhvrt.json" trigger="hover"</lord-icon>
+                </span >Hi {{ user.get_username }}
+              </p>
+              <div id="sideNavPrim" class="sidenav">
+                <a href="javascript:void(0)" class="closebtn" onclick="closeNavPrimary()">&times;</a>
+                <div class="profile-photo">
+                  <div class="image-wrapper">
+                    {% if user.is_staff %}
+                      {% if user.is_superuser %}
+                        <img src="https://brandeps.com/logo-download/S/Super-User-logo-vector-01.svg" style="background-color: #fff;" alt="">
+                      {% else %}
+                        <img src="https://cdn0.iconfinder.com/data/icons/banking-and-finance-86/100/employee__user__avatar__man__male-512.png" style="background-color: #fff;" alt="">
+                      {% endif %}
+                    {% else %}
+                    <img src="https://i.pinimg.com/736x/65/25/a0/6525a08f1df98a2e3a545fe2ace4be47.jpg" alt="">
+                    {% endif %}
+                  </div>
+                </div>
+                <h2>{{ user.get_username }}</h2></>
+                {% if user.is_superuser %}
+                  <p>as admin </p>
+                  {% else %}
+                  {% if user.is_staff %}
+                    <p>as employee </p>
+                  {% else %}
+                    <p>customer </p>
+                  {% endif %}
+                {% endif %}
+                <a href="/dashboard/">Go to dashboard</a>
+                <a class="sidebar-text"><a href="/logout/">Logout</a>
+              </div>          
+            </div>
+            {% else %}
+            <div id="mains">
+              <p " class="navbar-right" onclick="openNavPrimary()">
+                <span class="navbar-right">
+                  <lord-icon src="https://cdn.lordicon.com/dklbhvrt.json" trigger="hover"</lord-icon>
+                </span >Hi {{ user.get_username }}
+              </p>
+              <div id="sideNavPrim" class="sidenav">
+                <a href="javascript:void(0)" class="closebtn" onclick="closeNavPrimary()">&times;</a>
+                <div class="profile-photo">
+                  <div class="image-wrapper">
+                    {% if user.is_staff %}
+                      {% if user.is_superuser %}
+                        <img src="https://brandeps.com/logo-download/S/Super-User-logo-vector-01.svg" style="background-color: #fff;" alt="">
+                      {% else %}
+                        <img src="https://cdn0.iconfinder.com/data/icons/banking-and-finance-86/100/employee__user__avatar__man__male-512.png" style="background-color: #fff;" alt="">
+                      {% endif %}
+                    {% else %}
+                    <img src="https://i.pinimg.com/736x/65/25/a0/6525a08f1df98a2e3a545fe2ace4be47.jpg" alt="">
+                    {% endif %}
+                  </div>
+                </div>
+                <h2>{{ user.get_username }}</h2></>
+                {% if user.is_superuser %}
+                  <p>as admin </p>
+                  {% else %}
+                  {% if user.is_staff %}
+                    <p>as employee </p>
+                  {% else %}
+                    <p>customer </p>
+                  {% endif %}
+                {% endif %}
+                <a class="sidebar-text"><a href="/logout/">Logout</a>
+              </div>          
+            </div>
+          {% endif %}
+      {% else %}
+        <a href="/login/"><p><span class="sidebar-text"><lord-icon src="https://cdn.lordicon.com/dklbhvrt.json" trigger="hover"</lord-icon></span>Sign In</p></a>
+      {% endif %}
+    </div>
+  </div>
+  <script>
+    function openNav() {
+      document.getElementById("mySidenav").style.width = "250px";
+      document.getElementById("main").style.marginLeft = "250px";
+    }
+    
+    function closeNav() {
+      document.getElementById("mySidenav").style.width = "0";
+      document.getElementById("main").style.marginLeft= "0";
+    }
+
+    function openNavPrimary() {
+      document.getElementById("sideNavPrim").style.width = "250px";
+      document.getElementById("mains").style.marginLeft = "250px";
+    }
+
+    function closeNavPrimary() {
+      document.getElementById("sideNavPrim").style.width = "0";
+      document.getElementById("mains").style.marginLeft= "0";
+    }
+    </script>
+</div>
+

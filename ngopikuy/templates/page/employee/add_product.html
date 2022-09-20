@@ -1,0 +1,96 @@
+
+{% extends 'layout/base.html' %}
+{% load static %}
+{% block title %}
+{% endblock %}
+
+{% block content %}
+<style>
+
+
+</style>
+<link rel="stylesheet" type="text/css" href="{% static 'css/dashboard.css' %}">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp"rel="stylesheet">
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css">
+{% if messages %}  
+    {% for message in messages %}
+    <script type="text/javascript">
+        Swal.fire({
+            icon: 'success',
+            title: '{{message}}',
+        }).then((result) => {
+          if (result.isConfirmed) {
+            window.location.href = "/productlist/"
+          }
+        })
+    </script>  
+    {% endfor %}
+{% endif %} 
+<div class="container">
+    <!-- --------------------- ASIDE BAR --------------------- -->
+    {% include 'layout/sidebar.html' %}
+    <!-- --------------------- END OF ASIDE --------------------- -->
+    <main>  
+        <div class="wrapper-product">
+            <div class="edit-product">
+                <h2>Add Product</h2>
+                <form  method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <table class="table-edit-product">
+                        <tr>
+                            <td>
+                                <h3>Name</h3>
+                            </td>
+                            <td>
+                                <h3>&nbsp;:&nbsp;&nbsp;</h3>
+                            </td>
+                            <td>
+                                {{ form.name }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <h3>Price</h3>
+                            </td>
+                            <td>
+                                <h3>&nbsp;:&nbsp;&nbsp;</h3>
+                            </td>
+                            <td>
+                                {{ form.price }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <h3>Tags</h3>
+                            </td>
+                            <td>
+                                <h3>&nbsp;:&nbsp;&nbsp;</h3>
+                            </td>
+                            <td>
+                                {{ form.tags }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <h3>Images</h3>
+                            </td>
+                            <td>
+                                <h3>&nbsp;:&nbsp;&nbsp;</h3>
+                            </td>   
+                            <td>
+                                {{ form.image }}
+                            </td>
+                        </tr>                    
+                    </table>
+                    <p style="padding: 1rem;"><input value="Add Product"  type="submit" style="color: #fff;background-color: #3c49bd;padding: 0.6em;border-radius: var(--border-radius-1);box-shadow: var(--box-shadow);font-weight: 500;margin-bottom: 5rem;cursor: pointer;"/></p>
+                </form>
+            
+            </div> 
+
+        </div>  
+    </main>
+</div>
+{% endblock %}
+
+

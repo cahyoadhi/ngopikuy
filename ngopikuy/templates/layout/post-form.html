@@ -1,0 +1,22 @@
+<form class="blogs" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.media }}
+    <div style="padding: 1rem;">
+        Tittle
+        <p>{{ form.title }}</p>
+    </div>
+    <div style="padding: 1rem;">
+        Author
+        <p>{{ form.author }}</p>
+    </div>    
+    <div style="padding: 1rem;">
+        Thumbnail
+        <p>{{ form.thumbnail }}</p>
+    </div>    
+    <div style="padding: 1rem;">
+        Content
+        <p>{{ form.content }}</p>
+    </div>
+    
+    <p style="padding: 1rem;"><input value="Submit"  type="submit" style="color: #fff;background-color: #3c49bd;padding: 0.6em;border-radius: var(--border-radius-1);box-shadow: var(--box-shadow);font-weight: 500;margin-bottom: 5rem;cursor: pointer;"/></p>
+</form>

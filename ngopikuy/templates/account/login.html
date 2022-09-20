@@ -1,0 +1,69 @@
+{% extends 'layout/base.html' %}
+{% load static %}
+{% block title %}
+{% endblock %}
+{% block content %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/authenticated.css' %}">
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css">
+{% if messages %}  
+    {% for message in messages %}
+    <script type="text/javascript">
+        Swal.fire({
+            icon: 'error',
+            title: '{{message}}',
+        });
+    </script>  
+    {% endfor %}
+{% endif %}   
+<div class='container'>
+    <div class='window'>
+      <div class='img-bg'>
+    </div>
+    <div class='account-info'>
+        <div class='account-info-content'>
+            <form method="POST">
+                {% csrf_token %}
+                <h2>LOGIN</h2>
+                Username
+                <input  class='input-field username' id="{{ form.username.id_for_label }}" name="{{ form.username.html_name }}"></input>
+                <table class='half-input-table'>
+                    Password
+                    <input class='input-field password' id="{{ form.password.id_for_label }}" name="{{ form.password.html_name }}" type="Password"></input>
+                    <p>Doesn't have an account?, Please go to <a href="/register/" style="color: #fff;">Register</a> page.</p>
+                </table>
+                <input id="login" class='register' type="submit" value="Log In"/> 
+            </form>
+            <form method="POST">
+                {% csrf_token %}
+                <input style="display: none;" value="Demo-Admin" id="{{ form.username.id_for_label }}" name="{{ form.username.html_name }}"></input>
+                <table class='half-input-table'>
+                    <input style="display: none;" value="demo123321" id="{{ form.password.id_for_label }}" name="{{ form.password.html_name }}" type="Password"></input>
+                    <input style="color: #fff;background-color: #212a5f;padding: 0.4em;border-radius: 12%;cursor: pointer;border: none;" type="submit" value="Demo Admin"/> 
+                </table>                
+            </form>
+            <br>
+            <form method="POST">
+                {% csrf_token %}
+                <input style="display: none;" value="Demo-Staff" id="{{ form.username.id_for_label }}" name="{{ form.username.html_name }}"></input>
+                <table class='half-input-table'>
+                    <input style="display: none;" value="demo123321" id="{{ form.password.id_for_label }}" name="{{ form.password.html_name }}" type="Password"></input>
+                    <input style="color: #fff;background-color: #212a5f;padding: 0.4em;border-radius: 12%;cursor: pointer;border: none;" type="submit" value="Demo Staff"/> 
+                </table>                
+            </form>
+            <br>
+            <form method="POST">
+                {% csrf_token %}
+                <input style="display: none;" value="Demo-Customer" id="{{ form.username.id_for_label }}" name="{{ form.username.html_name }}"></input>
+                <table class='half-input-table'>
+                    <input style="display: none;" value="demo123321" id="{{ form.password.id_for_label }}" name="{{ form.password.html_name }}" type="Password"></input>
+                    <input style="color: #fff;background-color: #212a5f;padding: 0.4em;border-radius: 12%;cursor: pointer;border: none;" type="submit" value="Demo Customer"/> 
+                </table>                
+            </form>
+         </div>
+    </div>
+</div>
+
+
+{% endblock %}
+
