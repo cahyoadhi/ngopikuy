@@ -162,7 +162,6 @@ b{
     font-size:3em;
 }
 
-
 .New-Order td{
     font-weight: 600;
 }
@@ -435,13 +434,16 @@ main .recent-orders a{
         display: block;
     }
     .container{
+        gap: 0;
         display:grid;
         width: 100%;
-        grid-template-columns: 5% 75%;
+        grid-template-columns: 15% 85%;
         padding: 0;
         margin: 0;
     }
-
+    aside{
+        width: 100%;
+    }
     main{
         width: 100%;
         padding: 0;
@@ -449,8 +451,20 @@ main .recent-orders a{
     }
 
     main .insights{
+        margin-top: 0;
+        padding-left: 5%;
+        padding-right: 5%;
         grid-template-columns: repeat(2, 1fr);
-        gap :1rem;
+        gap :4%;
+    }
+
+    main .navbar{
+        padding-top: 3%;
+        padding-left: 5%;
+    }
+
+    main .recent-orders{
+        padding-top: 1%;
     }
 
     aside {
@@ -488,10 +502,6 @@ main .recent-orders a{
 
     main .recent-orders{
         width:100%;
-        position: absolute;
-        left: 50%;
-        transform: translateX(-50%);
-        
         padding-left: 5%;
         padding-right: 5%;
     }
@@ -508,6 +518,7 @@ main .recent-orders a{
     main #orderlist table tbody tr td:nth-child(7),main #orderlist table thead tr th:nth-child(7){
         display: none;
         }
+
     .navbar span{
         display: block;
     }
@@ -519,16 +530,6 @@ main .recent-orders a{
     aside .sidebar a.active{
         background: var(--color-light);
         width: 100vw;
-    }
-    main h1{
-        padding-left: 4%;
-    }
-
-    main .insights{
-        padding-left: 4%;
-        padding-right: 4%;
-        grid-template-columns: 50% 50%;
-        justify-content: space-between;
     }
 
     #hide{
@@ -553,6 +554,7 @@ main .recent-orders a{
     main .recent-orders{
         margin: 0;
         width:100%;
+        padding-top: 4%;
         padding-left: 4%;
         padding-right: 4%;
     }

@@ -11,6 +11,8 @@ urlpatterns = [
     path('register/',views.RegisterPage,name="register"),  
     path('dashboard/',views.DashBoardPage,name="dashboard"),
     path('orderlist/',views.OrderListPage,name="orderlist"),
+    path('order/<pk>/', views.EditOrder, name='order'),    
+    path('delete/order/<pk>/', views.DeleteOrder, name='delete_order'),
     path('productlist/',views.ProductListPage,name="productlist"),
     path('stream/', views.PostStreamView.as_view(), name='stream'),
     path('order/<pk>/', views.OrderDetail.as_view(), name='order_detail'),
@@ -21,8 +23,11 @@ urlpatterns = [
     path('checkout/',views.ChekcoutPage,name="checkout"),
     path('blogs/', views.PostList, name='blogs'),
     path('add_post/', views.AddPostView, name='add_post'),
-    path('blogsedit/',views.BlogListPage,name="blogsedit"),
+    path('blogsedit/',views.BlogListPage,name="bloglist"),
     path('edit/<slug:slug>/', views.EditPost, name='edit_post'),
+    path('delete/post/<pk>/', views.DeletePost, name='delete_post'),
     path('<slug:slug>/', views.PostDetail.as_view(), name='post_detail'),
 ]
+
+
 

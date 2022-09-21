@@ -4,6 +4,20 @@
 {% endblock %}
 
 {% block content %}
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css">
+{% if messages %}  
+    {% for message in messages %}
+    <script type="text/javascript">
+        Swal.fire({
+            icon: 'success',
+            title: '{{message}}',
+        }).then((result) => {
+
+        })
+    </script>  
+    {% endfor %}
+{% endif %}
 <link rel="stylesheet" type="text/css" href="{% static 'css/dashboard.css' %}">
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp"rel="stylesheet">
 <div class="container">
@@ -11,12 +25,12 @@
     {% include 'layout/sidebar.html' %}
     <!-- --------------------- END OF ASIDE --------------------- -->
     <main>  
-        <div class="hide" id="hide">
-            <span id="openNav" class="material-icons-sharp" style="cursor: pointer;font-size:3em;padding-left: 10%;">menu</span>
+        <div class="navbar">
+            <a class="animated" href="/add_post" style="color: #fff;background-color: #3c49bd;padding: 0.6em;border-radius: var(--border-radius-1);box-shadow: var(--box-shadow);font-weight: 600">CREATE NEW POST</a>
+            <span id="openNav" class="material-icons-sharp" >menu</span>
         </div>
         
         <div class="recent-orders" id="orderlist">
-            <a class="animated" href="/add_post" style="color: #fff;background-color: #3c49bd;padding: 0.6em;border-radius: var(--border-radius-1);box-shadow: var(--box-shadow);font-weight: 600;margin-bottom: 5rem;">CREATE NEW POST</a>
             <table >
                 <thead>
                     <tr>
@@ -29,21 +43,29 @@
                     </tr>
                 </thead>
                 <tbody>
-                {% for item in blogs %}
-                    <tr >
-                        <td>{{item.author}}</td>
-                        <td style="text-align: start;padding-left: 1rem">{{item.title}}</td>
-                        <td>{{item.updated_on}}</td>
-                        <td>{{item.created_on}}</td>
-                        {% if user.is_superuser %}
-                            <td style="text-align: start;padding-left: 1rem;width: 5%;"><a style="color: red;" href="/product/{{item.id}}">delete</a></td>
-                        {% else %}  
-                            <td></td> 
-                        {% endif %}
-                        <td style="text-align: start;padding-left: 1rem;width: 5%;"><a href="/edit/{{item.slug}}">edit</a></td>
-                        
-                    </tr>
-                {% endfor %}
+                {% if blogs %}
+                    {% for item in blogs %}
+                        <tr >
+                            <td>{{item.author}}</td>
+                            <td style="text-align: start;padding-left: 1rem">{{item.title}}</td>
+                            <td>{{item.updated_on}}</td>
+                            <td>{{item.created_on}}</td>
+                            {% if user.is_superuser %}
+                                <td style="text-align: start;padding-left: 1rem;width: 5%;"><a style="color: red;" href="/delete/post/{{item.slug}}">delete</a></td>
+                            {% else %}  
+                                <td></td> 
+                            {% endif %}
+                            <td style="text-align: start;padding-left: 1rem;width: 5%;"><a href="/edit/{{item.slug}}">edit</a></td>
+                        </tr>
+                    {% endfor %}
+                {% else %}
+                    <td></td>
+                    <td></td>
+                    <td>Post is empty</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                {% endif %}
                 </tbody>
             </table>
         </div>   

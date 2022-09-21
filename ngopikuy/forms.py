@@ -2,7 +2,7 @@ from django import forms
 from django.contrib.auth.models import User  
 from django.contrib.auth.forms import UserCreationForm  
 from django.core.exceptions import ValidationError
-from .models import Post,Product
+from .models import Post, Product, Order
   
 class CreateUserForm(UserCreationForm):  
     username = forms.CharField(label='username', min_length=5, max_length=150)  
@@ -48,4 +48,9 @@ class PostForm(forms.ModelForm):
 class ProductForm(forms.ModelForm):
     class Meta:
         model  = Product
+        fields = '__all__'
+
+class OrderForm(forms.ModelForm):
+    class Meta:
+        model  = Order
         fields = '__all__'

@@ -14,7 +14,10 @@
     </script>  
     {% endfor %}
 {% endif %}
-<a class="animated" href="/add_product" style="color: #fff;background-color: #3c49bd;padding: 0.6em;border-radius: var(--border-radius-1);box-shadow: var(--box-shadow);font-weight: 600;margin-bottom: 5rem;">ADD PRODUCT</a>
+<div class="navbar">
+    <a class="animated" href="/add_product" style="color: #fff;background-color: #3c49bd;padding: 0.6em;border-radius: var(--border-radius-1);box-shadow: var(--box-shadow);font-weight: 600">ADD PRODUCT</a>
+    <span id="openNav" class="material-icons-sharp">menu</span>
+  </div>
 <div class="recent-orders" id="orderlist" style="overflow-y: scroll;height: 90vh;">
     <table>
         <thead>
@@ -28,20 +31,29 @@
             </tr>
         </thead>
         <tbody>
-        {% for item in product %}
-            <tr >
-                <td style="text-align: start;padding-left: 1rem;width: 0%;"></td> 
-                <td style="text-align: start;padding-left: 1rem;width: 0%;"></td> 
-                <td style="text-align: start;padding-left: 1rem;width: 50%;">{{item.name}}</td>
-                <td style="width: 30%;">Rp. {{item.priceCurrency}}</td>         
-                {% if user.is_superuser %}
-                    <td style="text-align: start;padding-left: 1rem;width: 5%;"><a style="color: red;" href="/delete/product/{{item.id}}">delete</a></td>
-                {% else %}  
+        {% if product  %}
+            {% for item in product %}
+                <tr >
                     <td style="text-align: start;padding-left: 1rem;width: 0%;"></td> 
-                {% endif %}                      
-                <td style="text-align: start;padding-left: 1rem;width: 5%;"><a href="/product/{{item.id}}">edit</a></td>
-            </tr>
-        {% endfor %}
+                    <td style="text-align: start;padding-left: 1rem;width: 0%;"></td> 
+                    <td style="text-align: start;padding-left: 1rem;width: 50%;">{{item.name}}</td>
+                    <td style="width: 30%;">Rp. {{item.priceCurrency}}</td>         
+                    {% if user.is_superuser %}
+                        <td style="text-align: start;padding-left: 1rem;width: 5%;"><a style="color: red;" href="/delete/product/{{item.id}}">delete</a></td>
+                    {% else %}  
+                        <td style="text-align: start;padding-left: 1rem;width: 0%;"></td> 
+                    {% endif %}                      
+                    <td style="text-align: start;padding-left: 1rem;width: 5%;"><a href="/product/{{item.id}}">edit</a></td>
+                </tr>
+            {% endfor %}
+        {% else %}
+            <td></td>
+            <td></td>
+            <td>Product is empty</td>
+            <td></td>
+            <td></td>
+            <td></td>
+        {% endif %}
         </tbody>
     </table>
 </div>   

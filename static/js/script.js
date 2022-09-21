@@ -8,19 +8,19 @@ $(function(){
 
 // payment method form
 $('select').on('change', function() {
-   if (this.value=="cc"){
+   if (this.value=="Credit Card"){
     $('.payment-with-cc').css('display','table-row');
    }else{
     $('.payment-with-cc').css('display','none');
    }
 
-   if (this.value=="emoney"){
+   if (this.value=="E-Money"){
     $('.scanqr').css('display','block');
    }else{
     $('.scanqr').css('display','none');
    }
 
-   if (this.value=="paypal"){
+   if (this.value=="Paypal"){
     $('.paypal').css('display','block');
    }else{
     $('.paypal').css('display','none');
@@ -84,14 +84,15 @@ ScrollReveal().reveal('.main-left .button', {delay:700, origin:'left'});
 ScrollReveal().reveal('.main-right img', {delay:700, origin:'right'});
 ScrollReveal().reveal('.sosmed a', {delay:700, origin:'bottom',interval:400});
 ScrollReveal().reveal('.menu .card-wrapper', {delay:200, origin:'bottom',interval:200});
-ScrollReveal().reveal('.insights div', {delay:100, origin:'bottom',interval:250});
+ScrollReveal().reveal('.insights div, .navbar h1', {delay:100, origin:'bottom',interval:250});
 ScrollReveal().reveal('main .recent-orders ', {delay:50, origin:'bottom'});
 
 
 
 $('#openNav').on('click', function() {
   $('aside').css({
-    'width': '100%'
+    'width': '100%',
+    'height': '100vh',
 }, 1000);
 });
 

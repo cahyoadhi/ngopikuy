@@ -1,6 +1,6 @@
 from ngopikuy.models import Post
 from django.views import generic
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from ngopikuy.forms import PostForm  
 from django.shortcuts import get_object_or_404
 from django.contrib import messages
@@ -40,3 +40,9 @@ def BlogListPage(request):
     blogs = Post.objects.all()
     context = {'blogs': blogs}
     return render (request, 'page/blogs/blogs_list.html',context)
+
+@employee_only
+def DeletePost(request, pk):
+    Post.objects.get(slug=pk).delete()
+    messages.success(request, 'Post Deleted')
+    return redirect('bloglist')

@@ -14,6 +14,7 @@
             <h1>Dashboard</h1> 
             <span id="openNav" class="material-icons-sharp">menu</span>
           </div>
+
           <div class="insights">
               <div class="total-order">
                   <span class="material-icons-sharp">analytics</span>
@@ -37,10 +38,8 @@
               </div>
           </div>
 
-  {% comment %} END OF INSIGHTS {% endcomment %}
-
           <div class="recent-orders">
-              <h2>Realtime Orders</h2>
+              <h2 id="typewrite">Realtime Orders</h2>
               <table class="scroll-reveal">
                   <thead>
                       <tr>
@@ -53,7 +52,6 @@
                       </tr>
                   </thead>
                   <tbody id="stream-content">
-
                   </tbody>
               </table>
           </div>  
@@ -62,7 +60,7 @@
   {% comment %} END OF MAIN {% endcomment %}
 
   </div>
-
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/TypewriterJS/2.19.0/core.min.js" integrity="sha512-t4NGjfaRaGCjmiTGBsiG3w8FCp8ZY7dPlwZAXfeoGPARUT/rt3OP0NpQkblSgZy/2R8vPTXiEcq/zcWIJ8NusQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script>
     // Stream data order
     var eventSource  = new EventSource("/stream/");
@@ -70,9 +68,21 @@
     eventSource.onmessage = function(e) {
       
       final_data = JSON.parse(e.data)
-      content = "";
+      if (final_data.length <= 0) {
+        content = `<tr>
+                    <td></td>
+                    <td></td>
+                    <td>Order is empty... waiting for new order...</td>
+                    <td></td>
+                    <td>></td>
+                    <td></td >
+                  </tr>`;
+        }else{
+          content = ""
+        }
 
       final_data.forEach(function (item){
+        
         content += buildPostContent(item['id'], item['user__username'], item['tracking_no'], item['created_add'], item['status'], item['payment'], item['total_price'])
       })
         document.getElementById('stream-content').innerHTML = content;
@@ -137,5 +147,18 @@
         document.getElementById(child).innerHTML = content;
     }
 
+    var app = document.getElementById('typewrite');
+
+    var typewriter = new Typewriter(app, {
+        loop: true
+    });
+
+    typewriter.typeString('Waiting for new order...')
+        .pauseFor(2500)
+        .deleteAll()
+        .typeString('Realtime update...')
+        .pauseFor(2500)
+        .deleteAll()
+        .start();
   </script>
 {% endblock %}

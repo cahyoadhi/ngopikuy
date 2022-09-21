@@ -9,8 +9,10 @@ from django.contrib.auth.decorators import login_required
 from ngopikuy.controllers.decorators import  employee_only
 from django.http import StreamingHttpResponse
 from django.core.serializers.json import DjangoJSONEncoder
-from ngopikuy.forms import ProductForm  
+from ngopikuy.forms import ProductForm, OrderForm
 from django.shortcuts import get_object_or_404
+from django.http import HttpResponseNotFound
+
 
 class OrderDetail(View):
     def get(self, request, pk):
@@ -62,7 +64,12 @@ def OrderListPage(request):
     order = Order.objects.all()
     if 'search' in request.GET:
         search = request.GET['search']
-        order = Order.objects.filter(tracking_no__icontains=search)
+        query = Order.objects.filter(tracking_no__icontains=search)
+        if query.exists():
+            order = Order.objects.filter(tracking_no__icontains=search)
+            print(order)
+        else:
+            order = 0
     context = {'order': order}
     return render (request, 'page/employee/order_list.html',context)
 
@@ -94,7 +101,26 @@ def EditProduct(request, pk):
 
     return render(request, 'page/employee/edit_product.html', {'form':form, 'product':instance})
 
+@employee_only
 def DeleteProduct(request, pk):
     Product.objects.get(id=pk).delete()
     messages.success(request, 'Item Deleted')
     return redirect('productlist')
+
+@employee_only
+def EditOrder(request, pk):
+    instance = get_object_or_404(Order, tracking_no=pk)
+    form = OrderForm(instance=instance)
+    if request.method=='POST':
+        form = OrderForm(request.POST, instance=instance)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Order edited!")
+
+    return render(request, 'page/employee/edit_order.html', {'form':form, 'order':instance})    
+
+@employee_only
+def DeleteOrder(request, pk):
+    Order.objects.get(tracking_no=pk).delete()
+    messages.success(request, 'Order was Deleted')
+    return redirect('orderlist')
