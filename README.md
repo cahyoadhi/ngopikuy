@@ -1,8 +1,8 @@
-# Ngopikuy - Django Website for Coffee Shop
+# Coffee Shop Website
 
 ## Screenshots
-
-
+### Homepage
+![alt text](https://user-images.githubusercontent.com/90748704/191614990-09ffa4e0-ab07-41ba-a1d7-8a0bc0ec5fd5.png)
 
 
 
