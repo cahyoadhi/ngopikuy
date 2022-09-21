@@ -1,6 +1,8 @@
 # Coffee Shop Website (Django)
-## Demo
+![homepage](https://user-images.githubusercontent.com/90748704/191624416-249da180-5a9f-47d6-8d30-a6e0fa1028a9.png)
 
+
+## Demo
 ### Realtime dashboard
 ![demo-ngopikuy](https://user-images.githubusercontent.com/90748704/191624120-c3ff7955-7f39-4844-a347-5ddfabe39b63.gif)
 
