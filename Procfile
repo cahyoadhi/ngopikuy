@@ -1,1 +1,2 @@
-web: gunicorn 'ngopikuy.wsgi'
+release: python manage.py migrate
+web: gunicorn ngopikuy.wsgi
