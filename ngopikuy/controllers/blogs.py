@@ -4,7 +4,7 @@ from django.shortcuts import render, redirect
 from ngopikuy.forms import PostForm  
 from django.shortcuts import get_object_or_404
 from django.contrib import messages
-from ngopikuy.controllers.decorators import  employee_only
+from ngopikuy.controllers.decorators import  employee_only, admin_only
 
 class PostDetail(generic.DetailView):
     model = Post
@@ -41,7 +41,7 @@ def BlogListPage(request):
     context = {'blogs': blogs}
     return render (request, 'page/blogs/blogs_list.html',context)
 
-@employee_only
+@admin_only
 def DeletePost(request, pk):
     Post.objects.get(slug=pk).delete()
     messages.success(request, 'Post Deleted')

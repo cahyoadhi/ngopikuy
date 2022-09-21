@@ -11,12 +11,13 @@ SECRET_KEY = 'django-insecure-rr&j*j(m)!)0$+pvqd-_uec7)!g344ia4b4ql)!ed48r8#@@lt
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
 
 INSTALLED_APPS = [
+    'jazzmin',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -72,6 +73,19 @@ DATABASES = {
     }
 }
 
+JAZZMIN_UI_TWEAKS = {
+    "theme": "darkly",
+}
+
+JAZZMIN_SETTINGS = {
+    # title of the window (Will default to current_admin_site.site_title if absent or None)
+    "site_title": "Ngopikuy Admin",
+
+    # Title on the login screen (19 chars max) (defaults to current_admin_site.site_header if absent or None)
+    "site_header": "Ngopikuy",
+
+    # Title on the brand (19 chars max) (defaults to current_admin_site.site_header if absent or None)
+    "site_brand": "Ngopikuy",}
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
@@ -90,6 +104,7 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+
 
 
 # Internationalization

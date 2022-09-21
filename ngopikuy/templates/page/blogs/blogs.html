@@ -1,6 +1,9 @@
 {% extends 'layout/base.html' %}
 {% load static %}
 {% block content %}
+{% block title %}
+<title>Ngopikuy!! - Our Blogs</title>
+{% endblock %}
 {% include 'layout/navbar.html' %}
 
 <link rel="stylesheet" type="text/css" href="{% static 'css/blogs.css' %}">
@@ -23,5 +26,5 @@
     {% endfor %}
 </div>
 
-
+{% include 'layout/footer.html' %}
 {%endblock%}

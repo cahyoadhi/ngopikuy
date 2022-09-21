@@ -1,6 +1,7 @@
 {% extends 'layout/base.html' %}
 {% load static %}
 {% block title %}
+<title>Dashboard</title>
 {% endblock %}
 
 {% block content %}
@@ -43,14 +44,16 @@
               <table class="scroll-reveal">
                   <thead>
                       <tr>
-                          <th>Order Time</th>
-                          <th>Customer Name</th>
+                          <th style="text-align: start;">Order Time</th>
+                          <th >Order ID</th>
+                          <th style="text-align: start;">Customer Name</th>
                           <th>Status</th>
                           <th>Payment</th>
                           <th>Total Price</th>
                           <th></th>
                       </tr>
                   </thead>
+                  
                   <tbody id="stream-content">
                   </tbody>
               </table>
@@ -69,14 +72,7 @@
       
       final_data = JSON.parse(e.data)
       if (final_data.length <= 0) {
-        content = `<tr>
-                    <td></td>
-                    <td></td>
-                    <td>Order is empty... waiting for new order...</td>
-                    <td></td>
-                    <td>></td>
-                    <td></td >
-                  </tr>`;
+        content = `Order is empty... waiting for new order...`;
         }else{
           content = ""
         }
@@ -123,12 +119,13 @@
         };
         
         content = `<tr class=${status}>
-                    <td class='text-left'>${times_dif}</td>
-                    <td>${user}</td>
+                    <td "width: 8%;text-align: start;">${times_dif}</td>
+                    <td >${tracking_no}</td>
+                    <td style="width: 20%;text-align: start;">${user}</td>
                     <td id=${status}>${status}</td>
                     <td class='text-left'>${payment}</td>
                     <td id="total${status}">Rp.${total_price}</td>
-                    <td ><a class="primary" href="/order/${tracking_no}" role="button">Open</a></td >
+                    <td ><a class="primary" href="/order/details/${tracking_no}" role="button">Open</a></td >
                   </tr>`;
       return content
     }

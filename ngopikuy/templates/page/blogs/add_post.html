@@ -1,7 +1,9 @@
 {% extends 'layout/base.html' %}
 {% load static %}
 {% block title %}
+<title>Dashboard - Add Postt</title>
 {% endblock %}
+
 
 {% block content %}
 <link rel="stylesheet" type="text/css" href="{% static 'css/dashboard.css' %}">
@@ -18,5 +20,7 @@
         </div>   
     </main>
 </div>
+
+{% include 'layout/footer.html' %}
 {% endblock %}
 

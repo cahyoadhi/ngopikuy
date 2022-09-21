@@ -1,4 +1,3 @@
-from itertools import product
 from django_unicorn.components import UnicornView, QuerySetType
 from ngopikuy.models import Cart
 from django.db.models import F

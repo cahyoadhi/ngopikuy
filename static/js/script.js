@@ -84,7 +84,7 @@ ScrollReveal().reveal('.main-left .button', {delay:700, origin:'left'});
 ScrollReveal().reveal('.main-right img', {delay:700, origin:'right'});
 ScrollReveal().reveal('.sosmed a', {delay:700, origin:'bottom',interval:400});
 ScrollReveal().reveal('.menu .card-wrapper', {delay:200, origin:'bottom',interval:200});
-ScrollReveal().reveal('.insights div, .navbar h1', {delay:100, origin:'bottom',interval:250});
+ScrollReveal().reveal('.insights div, .navbar h1', {delay:100, origin:'bottom',interval:200});
 ScrollReveal().reveal('main .recent-orders ', {delay:50, origin:'bottom'});
 
 

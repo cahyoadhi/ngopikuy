@@ -22,4 +22,15 @@ def employee_only(view_func):
 			return view_func(request, *args, **kwargs)
 	return wrapper_func
 
-	
+def admin_only(view_func):
+	def wrapper_func(request, *args, **kwargs):
+		group = None
+		if request.user.groups.exists():
+			group = request.user.groups.all()[0].name
+		if group == 'customer':
+			return redirect('customer')
+		elif group == 'employee':
+			return redirect('dashboard')
+		elif group == 'admin':
+			return view_func(request, *args, **kwargs)
+	return wrapper_func

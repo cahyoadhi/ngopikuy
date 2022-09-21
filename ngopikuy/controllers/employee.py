@@ -6,12 +6,11 @@ from ngopikuy.models import Order,Product
 from django.shortcuts import render,redirect
 from django.contrib.auth.models import Group
 from django.contrib.auth.decorators import login_required
-from ngopikuy.controllers.decorators import  employee_only
+from ngopikuy.controllers.decorators import  employee_only, admin_only
 from django.http import StreamingHttpResponse
 from django.core.serializers.json import DjangoJSONEncoder
 from ngopikuy.forms import ProductForm, OrderForm
 from django.shortcuts import get_object_or_404
-from django.http import HttpResponseNotFound
 
 
 class OrderDetail(View):
@@ -34,8 +33,9 @@ class OrderDetail(View):
         context = {'order':order, 'order_list':order_list}
         return render (request, 'page/employee/order_detail.html',context)
 
-@employee_only
+
 @login_required(login_url='login')
+@employee_only
 def DashBoardPage(request):
     employee_name = request.user
     group = Group.objects.get(user = employee_name)
@@ -79,6 +79,7 @@ def ProductListPage(request):
     context = {'product': product}
     return render (request, 'page/employee/product_list.html',context)
 
+
 @employee_only
 def AddProduct(request):
     if request.method=='POST':
@@ -101,7 +102,7 @@ def EditProduct(request, pk):
 
     return render(request, 'page/employee/edit_product.html', {'form':form, 'product':instance})
 
-@employee_only
+@admin_only
 def DeleteProduct(request, pk):
     Product.objects.get(id=pk).delete()
     messages.success(request, 'Item Deleted')
@@ -119,7 +120,7 @@ def EditOrder(request, pk):
 
     return render(request, 'page/employee/edit_order.html', {'form':form, 'order':instance})    
 
-@employee_only
+@admin_only
 def DeleteOrder(request, pk):
     Order.objects.get(tracking_no=pk).delete()
     messages.success(request, 'Order was Deleted')

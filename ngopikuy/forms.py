@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm  
 from django.core.exceptions import ValidationError
 from .models import Post, Product, Order
+from django.contrib.auth.forms import PasswordChangeForm
   
 class CreateUserForm(UserCreationForm):  
     username = forms.CharField(label='username', min_length=5, max_length=150)  
@@ -40,6 +41,7 @@ class CreateUserForm(UserCreationForm):
         )  
         return user  
 
+
 class PostForm(forms.ModelForm):
     class Meta:
         model  = Post
@@ -53,4 +55,9 @@ class ProductForm(forms.ModelForm):
 class OrderForm(forms.ModelForm):
     class Meta:
         model  = Order
+        fields = '__all__'
+
+class AccountForm(forms.ModelForm):
+    class Meta:
+        model  = User
         fields = '__all__'

@@ -43,35 +43,22 @@
             <span class="material-icons-sharp">rss_feed</span>
             <h3>Blog</h3>
         </a>
+        {% if user.is_superuser %}
+            <a href="/userlist">
+                <span class="material-icons-sharp">person</span>
+                <h3>User Management</h3>
+            </a>
+            <a href="/admin">
+              <span class="material-icons-sharp">admin_panel_settings</span>
+              <h3>Admin Panel</h3>
+            </a>
+            
+        {% endif %}
         <a href="/logout">
             <span class="material-icons-sharp">logout</span>
             <h3>Logout</h3>
         </a>
     </div>
-{% comment %}     
-    <div class="sidebar hidden" id="sidebar">
-      <br>    
-      <a href="/dashboard">
-          <span class="material-icons-sharp">grid_view</span>
-          <h3>Dashboard</h3>
-      </a>
-      <a href="/orderlist">
-          <span class="material-icons-sharp">receipt_long</span>
-          <h3>Orders</h3>
-      </a>
-      <a href="#">
-          <span class="material-icons-sharp">inventory</span>
-          <h3>Products</h3>
-      </a>
-      <a href="/blogsedit">
-          <span class="material-icons-sharp">rss_feed</span>
-          <h3>Blog</h3>
-      </a>
-      <a href="/logout">
-          <span class="material-icons-sharp">logout</span>
-          <h3>Logout</h3>
-      </a>
-  </div> {% endcomment %}
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js" integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script>
     let switchNavMenuItem = (menuItems) => {

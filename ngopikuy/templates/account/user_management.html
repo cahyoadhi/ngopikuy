@@ -1,0 +1,127 @@
+{% extends 'page/employee/layout/base-list.html' %}
+{% block list %}
+{% block title %}
+<title>User Management</title>
+{% endblock %}
+
+<style>
+    .start15{
+        text-align: start;width: 15%;
+    }
+
+    .end10{
+        text-align: end;width: 10%;
+    }
+    .end5{
+        text-align: end;width: 5%;
+    }
+</style>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css">
+{% if messages %}  
+    {% for message in messages %}
+    <script type="text/javascript">
+        Swal.fire({
+            icon: 'success',
+            title: '{{message}}',
+        }).then((result) => {
+
+        })
+    </script>  
+    {% endfor %}
+{% endif %}
+<div class="navbar">
+    <span id="openNav" class="material-icons-sharp">menu</span>
+  </div>
+
+<div class="recent-orders" id="orderlist">
+    <h1>All User List</h1>
+      
+    <h2>Admin</h2>
+    <table>
+        <thead>
+            <tr>
+                <th class="start15">Username</th>
+                <th class="start15">Email</th>
+                <th class="start15">Last Login</th>
+                <th class="start15">Date Joined</th>
+                <th></th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for admins in admin %}
+            <tr >
+                <td class="start15">{{admins.username}}</td>    
+                <td class="start15">{{admins.email}}</td>
+                <td class="start15">{{admins.last_login}}</td> 
+                <td class="start15">{{admins.date_joined}}</td>                                 
+                <td class="end10"><a style="color: rgb(201, 183, 24);" href="/admin/auth/user/{{admins.id}}/password/">change password</a></td>
+                <td class="end5"><a href="/user/{{admins.id}}">edit</a></td>
+                <td class="end5" style="padding-right: 1%;"><a style="color: red;" href="/delete/user/{{admins.id}}">delete</a></td>  
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+
+    <h2>Staff</h2>
+    <table>
+        <thead>
+            <tr>
+                <th class="start15">Username</th>
+                <th class="start15">Email</th>
+                <th class="start15">Last Login</th>
+                <th class="start15">Date Joined</th>
+                <th></th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for staffs in staff %}
+            <tr >
+                <td class="start15">{{staffs.username}}</td>       
+                <td class="start15">{{staffs.email}}</td>    
+                <td class="start15">{{staffs.last_login}}</td> 
+                <td class="start15">{{staffs.date_joined}}</td> 
+                <td class="end10"><a style="color: rgb(201, 183, 24);" href="/admin/auth/user/{{staffs.id}}/password/">change password</a></td>   
+                <td class="end5"><a href="/user/{{staffs.id}}">edit</a></td>
+                <td class="end5" style="padding-right: 1%;"><a style="color: red;" href="/delete/user/{{staffs.id}}">delete</a></td>  
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <h2>Customer</h2>
+    <table>
+        <thead>
+            <tr>
+                <th class="start15">Username</th>
+                <th class="start15">Email</th>
+                <th class="start15">Last Login</th>
+                <th class="start15">Date Joined</th>
+                <th></th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for customers in customer %}
+            <tr >
+                <td class="start15">{{customers.username}}</td>    
+                <td class="start15">{{customers.email}}</td>
+                <td class="start15">{{customers.last_login}}</td> 
+                <td class="start15">{{customers.date_joined}}</td>
+                <td class="end10"><a style="color: rgb(201, 183, 24);" href="/admin/auth/user/{{customers.id}}/password/">change password</a></td>   
+                <td class="end5"><a href="/user/{{customers.id}}">edit</a></td>
+                <td class="end5" style="padding-right: 1%;"><a style="color: red;" href="/delete/user/{{customers.id}}">delete</a></td>  
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+        
+    
+</div> 
+{% endblock list %}

@@ -11,11 +11,14 @@ urlpatterns = [
     path('register/',views.RegisterPage,name="register"),  
     path('dashboard/',views.DashBoardPage,name="dashboard"),
     path('orderlist/',views.OrderListPage,name="orderlist"),
-    path('order/<pk>/', views.EditOrder, name='order'),    
+    path('userlist/',views.UserList,name="userlist"),
+    path('user/<pk>/', views.EditUser, name='edit_user'), 
+    path('delete/user/<pk>/', views.DeleteUser, name='delete_user'),
+    path('order/<pk>/', views.EditOrder, name='edit_order'),    
     path('delete/order/<pk>/', views.DeleteOrder, name='delete_order'),
     path('productlist/',views.ProductListPage,name="productlist"),
     path('stream/', views.PostStreamView.as_view(), name='stream'),
-    path('order/<pk>/', views.OrderDetail.as_view(), name='order_detail'),
+    path('order/details/<pk>/', views.OrderDetail.as_view(), name='order_detail'),
     path('delete/product/<pk>/', views.DeleteProduct, name='delete_product'),
     path('product/<pk>/', views.EditProduct, name='edit_product'),
     path('add_product/', views.AddProduct, name='add_product'),
@@ -28,6 +31,4 @@ urlpatterns = [
     path('delete/post/<pk>/', views.DeletePost, name='delete_post'),
     path('<slug:slug>/', views.PostDetail.as_view(), name='post_detail'),
 ]
-
-
 

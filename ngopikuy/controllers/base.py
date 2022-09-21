@@ -4,10 +4,13 @@ from .employee import *
 from .customer import *
 from .blogs import *
 from .authentication import *
+from django.template import RequestContext
+
 
 def HomePage(request):
+    product = Product.objects.all()
     favmenu = Product.objects.filter(tags__name__in=["FAV"])
-    context = {'favs':favmenu}
+    context = {'favs':favmenu, 'product':product}
     return render (request, 'index.html',context)
 
 def ContactPage(request):
