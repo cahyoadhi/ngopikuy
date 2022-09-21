@@ -1,8 +1,8 @@
-# Ngopikuy - Django Website
+# Ngopikuy - Django Website for Coffee Shop
 
-This coffee shop website for customer and staff.
+This website include :
 - Responsive Page
-- Realtime dashboard for staff
+- 3 Role User (Customer, Staff, Admin)
 - Blogs
 
 
