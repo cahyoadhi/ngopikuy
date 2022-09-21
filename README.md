@@ -29,4 +29,4 @@ python manage.py makemigrations
 python manage.py migrate
 ```
 
-*This project is developed for demo purpose and it's not supposed to be used in real application.*
+*This project for demo purpose and it's not supposed to be used in real application.*
