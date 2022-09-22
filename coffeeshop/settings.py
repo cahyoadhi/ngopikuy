@@ -42,6 +42,8 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+CSRF_TRUSTED_ORIGINS = ['https://ngopikuy-production.up.railway.app/']
+
 ROOT_URLCONF = 'coffeeshop.urls'
 
 TEMPLATES = [
