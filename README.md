@@ -25,6 +25,7 @@ git clone https://github.com/cahyoadhi/ngopikuy.git
 pip install -r requirements.txt
 python manage.py makemigrations
 python manage.py migrate
+python manage.py runserver
 ```
 
 *This project for demo purpose and it's not supposed to be used in real application.*
