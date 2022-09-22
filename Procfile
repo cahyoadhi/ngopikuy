@@ -1,1 +1,1 @@
-web: gunicorn ngopikuy.wsgi
+web: gunicorn coffeeshop.wsgi
