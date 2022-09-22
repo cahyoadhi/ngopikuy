@@ -18,9 +18,6 @@ every time there is a new order that comes in, the staff and admin will immediat
 ## Installation
 
 It's recommended that you setup a virtualenv before development.
-```sh
-\venv\Scripts\activate.bat 
-```
 
 Then just install requirements, migrate, and runserver to get started:
 ```sh
