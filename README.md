@@ -1,7 +1,7 @@
 # Coffee Shop Website (Django)
 ![homepage](https://user-images.githubusercontent.com/90748704/191624416-249da180-5a9f-47d6-8d30-a6e0fa1028a9.png)
 <p align="center">
-[Live Preview](https://ngopikuy-production.up.railway.app/)
+<a href="[url](https://ngopikuy-production.up.railway.app/)"></a>
 </p>
 
 ## Demo
