@@ -9,9 +9,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-rr&j*j(m)!)0$+pvqd-_uec7)!g344ia4b4ql)!ed48r8#@@lt'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['https://ngopikuy-production.up.railway.app/']
 
 
 # Application definition
@@ -41,8 +41,6 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
-
-CSRF_TRUSTED_ORIGINS = ['https://ngopikuy-production.up.railway.app/']
 
 ROOT_URLCONF = 'coffeeshop.urls'
 
