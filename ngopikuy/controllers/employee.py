@@ -11,6 +11,7 @@ from django.http import StreamingHttpResponse
 from django.core.serializers.json import DjangoJSONEncoder
 from ngopikuy.forms import ProductForm, OrderForm
 from django.shortcuts import get_object_or_404
+import itertools
 
 
 class OrderDetail(View):
@@ -45,13 +46,11 @@ def DashBoardPage(request):
 
 def event_stream():
     initial_data = ""
-    while True:
+    for i in itertools.count(start=1):
         data = json.dumps(list(Order.objects.values("id","user__username","tracking_no", "created_add", "status","payment","total_price").order_by('-status')), cls=DjangoJSONEncoder)
-
         if not initial_data == data:
             yield "\ndata: {}\n\n".format(data) 
             initial_data = data
-        time.sleep(1)
 
 class PostStreamView(View):
     def get(self, request):

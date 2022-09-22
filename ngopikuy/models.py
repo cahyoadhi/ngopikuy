@@ -1,3 +1,4 @@
+from email.policy import default
 from django.db import models
 from django.contrib.auth.models import User
 from taggit.managers import TaggableManager
@@ -9,7 +10,7 @@ class Profile(models.Model):
     name = models.CharField(max_length= 40, null= True, blank= True)
     email = models.CharField(max_length= 40, null= True, blank= True)
     phone = models.CharField(max_length= 40, null= True, blank= True)
-    profile_pic = models.ImageField()
+    profile_pic = models.ImageField(default='no_images.png')
     def __str__(self):
         return str(self.user) 
 
@@ -24,7 +25,7 @@ class Profile(models.Model):
 class Product(models.Model):
     name = models.CharField(max_length=50, null=True, blank=True)
     price = models.FloatField()
-    image = models.ImageField(upload_to='product', null=True, blank=True)
+    image = models.ImageField(default='no_images.png', upload_to='product', null=True, blank=True)
 
     def __str__(self):
         return self.name
@@ -104,7 +105,7 @@ class Post(models.Model):
     created_on = models.DateTimeField(auto_now_add=True)
     statss = ((0,"Draft"),(1,"Publish"))
     status = models.IntegerField(choices=statss, default=0)
-    thumbnail = models.ImageField(null=True, blank=True)
+    thumbnail = models.ImageField(default='no_images.png', null=True, blank=True)
 
     class Meta:
         ordering = ['-created_on']

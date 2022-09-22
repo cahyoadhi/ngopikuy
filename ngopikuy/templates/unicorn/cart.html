@@ -1,5 +1,5 @@
 <div>
-    {% load static %}    
+{% load static %
     <section class="child top">
         <div class="cart-hidden">
             <button class="show-cart" >
@@ -16,40 +16,50 @@
                     </span>
                     <p>&nbsp;Checkout</p>
                 </button>
-        </form>
+            </form>
         </div>
         <div class="main-bar">
             <div class="column customer">
                 <h1 class="sticky name-cust">{{name}}'s Cart : </h1>
                 <div class="order-item sticky">
                     <table >
-                        {% if user_products %}
+                {% if user_products %}
                             {% for product in user_products %}
-                            <tr>
-                                <td class="one"><button class="bg-transparent" unicorn:click="delete_item({{ product.pk }})"><span class="material-icons-outlined button">delete</span></button></td>
-                                <td class="two">{{ product.quantity }}&nbsp;x</td>
-                                <td class=><p class="three">{{ product.product.name }}</p></td>
-                                <td class="four"><p style="text-align: end">
-                                    {{product.totalPriceNominal|floatformat:-2}}&nbsp;K</p></td>
-                            </tr>
+                                <tr>
+                                    <td class="one">
+                                        <button class="bg-transparent" unicorn:click="delete_item({{ product.pk }})">
+                                            <span class="material-icons-outlined button">delete</span>
+                                        </button>
+                                    </td>
+                                    <td class="two">{{ product.quantity }}&nbsp;x</td>
+                                    <td class=><p class="three">{{ product.product.name }}</p></td>
+                                    <td class="four">
+                                        <p style="text-align: end">{{product.totalPriceNominal|floatformat:-2}}&nbsp;K</p>
+                                    </td>
+                                </tr>
                             {% endfor %}
-                        <tr>
-                            <td class="one"></td>
-                            <td class="two"></td>
-                            <td class="three"><p class="three"><strong>TOTAL</strong></p></td>
-                            <td class="four"><p style="text-align: end"><strong>IDR.&nbsp;&nbsp;{{total|floatformat:-2}}&nbsp;K</strong></p></td>
-                        </tr>
+                            <tr>
+                                <td class="one"></td>
+                                <td class="two"></td>
+                                <td class="three">
+                                    <p class="three"><strong>TOTAL</strong></p>
+                                </td>
+                                <td class="four">
+                                    <p style="text-align: end"><strong>IDR.&nbsp;&nbsp;{{total|floatformat:-2}}&nbsp;K</strong></p>
+                                </td> 
+                            </tr>
                     </table>
                     <form method="POST" class="form-left">
                         {% csrf_token %}
                         <input class="price checkout" type="submit" value="Checkout"/> 
                     </form>
-                        {% else %}
+                {% else %}
                             <p class="sticky" style="margin-top:2rem">cart is empty.</p>
-                        {% endif %}              
+                {% endif %}
                 </div>
-            </div>   
+            </div>
             <div class='food'>
+
                 <div class="showmenu">
                     <div class="category">
                         <h1>-- COFFEE --</h1>
@@ -70,6 +80,33 @@
                                     <div class="items" style="display: flex;">                                        
                                         <button data-product={{coffee.id}} data-action="add" class="price" unicorn:click="subtract_item({{ coffee.pk }})">-</button>
                                         <button data-product={{coffee.id}} data-action="add" class="price" unicorn:click="add_item({{ coffee.pk }})">+</button>
+                                    </div>
+                                </div> 
+                            </div>
+                        </div> 
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="showmenu">
+                    <div class="category">
+                        <h1>-- TEA --</h1>
+                    </div>
+                    <div class="menu">
+                        {% for tea in teas %}
+                        <div class="card-wrapper">
+                            <div class="card">
+                                <div class="image-content">
+                                    <span class="overlay"></span>
+                                    <div class="card-image">
+                                        <img src={{tea.imageUrl}} alt="" class="card-img lazy" loading="lazy">
+                                    </div>
+                                </div>
+                                <div class="card-content">
+                                    <h2 class="name">{{tea.name}}</h2>
+                                    <p><strong>IDR. {{tea.priceNominal|floatformat:-2}}K</strong></p>
+                                    <div class="items" style="display: flex;">                                        
+                                        <button data-product={{tea.id}} data-action="add" class="price" unicorn:click="subtract_item({{ tea.pk }})">-</button>
+                                        <button data-product={{tea.id}} data-action="add" class="price" unicorn:click="add_item({{ tea.pk }})">+</button>
                                     </div>
                                 </div> 
                             </div>
@@ -124,7 +161,8 @@
                                     <div class="items" style="display: flex;">                                        
                                         <button data-product={{juice.id}} data-action="add" class="price" unicorn:click="subtract_item({{ juice.pk }})">-</button>
                                         <button data-product={{juice.id}} data-action="add" class="price" unicorn:click="add_item({{ juice.pk }})">+</button>
-                                    </div> </div> 
+                                    </div>
+                                </div> 
                             </div>
                         </div> 
                         {% endfor %}
@@ -150,39 +188,16 @@
                                     <div class="items" style="display: flex;">                                        
                                         <button data-product={{chocholate.id}} data-action="add" class="price" unicorn:click="subtract_item({{ chocholate.pk }})">-</button>
                                         <button data-product={{chocholate.id}} data-action="add" class="price" unicorn:click="add_item({{ chocholate.pk }})">+</button>
-                                    </div></div> 
-                            </div>
-                        </div> 
-                        {% endfor %}
-                    </div>
-                </div>
-                <div class="showmenu">
-                    <div class="category">
-                        <h1>-- TEA --</h1>
-                    </div>
-                    <div class="menu">
-                        {% for tea in teas %}
-                        <div class="card-wrapper">
-                            <div class="card">
-                                <div class="image-content">
-                                    <span class="overlay"></span>
-                                    <div class="card-image">
-                                        <img src={{tea.imageUrl}} alt="" class="card-img lazy" loading="lazy">
                                     </div>
-                                </div>
-                                <div class="card-content">
-                                    <h2 class="name">{{tea.name}}</h2>
-                                    <p><strong>IDR. {{tea.priceNominal|floatformat:-2}}K</strong></p>
-                                    <div class="items" style="display: flex;">                                        
-                                        <button data-product={{tea.id}} data-action="add" class="price" unicorn:click="subtract_item({{ tea.pk }})">-</button>
-                                        <button data-product={{tea.id}} data-action="add" class="price" unicorn:click="add_item({{ tea.pk }})">+</button>
-                                    </div> </div> 
+                                </div> 
                             </div>
                         </div> 
                         {% endfor %}
                     </div>
                 </div>
+
             </div>
         </div>
     </section>
+
 </div>
